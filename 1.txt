@@ -1,0 +1,20 @@
+1.Creation of aws instances
+  1.Download the terraform binary file https://www.terraform.io/downloads.html
+  2.Install and unzip 
+  3.Make one folder name MSR
+  4.Create new terraform file name ec2msr.tf using vim ec2msr.tf
+  5.Make congifuration 
+    provider "aws" {
+  access_key = "XXXX"
+  secret_key = "XXXX"
+  region     = "us-east-1"
+}
+
+resource "aws_instance" "MSR-test-Instance-1" {
+  ami           = "ami-2757f631"
+  instance_type = "t2.micro"
+}
+   6.save the file 
+   7.Initialize folder by terrafrom init 
+   8.Apply settings by terraform apply 
+   9.If to delete fire command terraform destroy

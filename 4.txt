@@ -1,0 +1,45 @@
+couchdb installation using ansible
+1.Configuring Ansible
+  create ansible hostfile for MSR-test-Instance-2 located in /etc/ansible/hosts
+2.Creating a Playbook
+  Create a file called couchdb.yml and open it for editing.
+  Copy the following text into the file, then save and close it.
+
+couchdb_settings:
+  httpd:
+    port: "5984"
+    bind_address: "0.0.0.0"
+
+couchdb_admins:
+  admin: P4s$w0rd
+
+couchdb_users:
+  user_with_roles:
+    password: password123
+    roles:
+      - developer
+      - manager
+  user_without_roles:
+    password: password456
+
+couchdb_databases:
+  database_without_security: {}
+  database_with_admins:
+    admins:
+      names:
+        - user_without_roles
+      roles:
+        - manager
+  database_with_members:
+    members:
+      roles:
+        - developer
+
+couchdb_replication:
+  - source: my_database
+    target: http://backup.example.com:5984/my_database
+    continuous: yes
+
+couchdb_url: "http://localhost:5984"
+3.Run the playbook.
+  ansible-playbook couchdb.yml --ask-sudo-pass

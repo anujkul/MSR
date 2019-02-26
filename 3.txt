@@ -1,0 +1,15 @@
+Apache webserver installation using ansible
+1.Configuring Ansible
+  create ansible hostfile for MSR-test-Instance-1 located in /etc/ansible/hosts
+2.Creating a Playbook
+  Create a file called apache.yml and open it for editing.
+  Copy the following text into the file, then save and close it.
+
+  hosts: apache
+  sudo: yes
+  tasks:
+    - name: install apache2
+      apt: name=apache2 update_cache=yes state=latest
+3.Run the playbook.
+  ansible-playbook apache.yml --ask-sudo-pass
+	
